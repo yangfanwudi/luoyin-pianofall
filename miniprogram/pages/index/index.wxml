@@ -1,0 +1,2 @@
+<!-- 小程序只作为 WebView 外壳；钢琴/音频/导入全部在 H5 站点内运行 -->
+<web-view src="{{url}}"></web-view>

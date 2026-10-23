@@ -62,13 +62,14 @@ site/
 ├─ vendor/basic-pitch/ 懒加载扒谱 bundle + 模型
 ├─ assets/             图标 / OG 图 / favicon
 ├─ manifest.webmanifest
-└─ sw.js
+├─ sw.js
+└─ miniprogram/        微信小程序 WebView 外壳
 ```
 
 ## App / 小程序
 
 - **PWA（推荐）**：手机/桌面浏览器打开站点，点顶栏「安装 App」或浏览器菜单“安装应用/添加到主屏幕”，即可像 App 一样全屏打开，二次打开可离线。
-- **微信小程序**：工作区根目录的 `miniprogram/` 是 WebView 外壳，需要你自己的 AppID 和“业务域名”配置（详见其中的 `README.md`）。纯套壳可能过不了审核，需按实际类目评估。
+- **微信小程序**：仓库内的 `miniprogram/` 是 WebView 外壳，需要你自己的 AppID 和“业务域名”配置，详见 [miniprogram/README.md](miniprogram/README.md)。纯套壳可能过不了审核，需按实际类目评估。
 - **原生 App**：当前交付为 PWA；如需 APK/IPA，可用 Capacitor 等工具把线上 URL 包进 WebView，再走签名/上架流程。
 
 ## 曲目与版权
