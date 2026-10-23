@@ -2107,7 +2107,7 @@
                     <option value="default">默认排序</option>
                     <option value="difficulty">按难度</option>
                     <option value="title">按曲名</option>
-                    <option value="duration">按时长</option>
+                    <option value="duration">按时长（长→短）</option>
                 </select>
             </div>
             <div class="song-list-head" aria-hidden="true">
@@ -3055,8 +3055,11 @@
             visibleSongIndices.sort((a, b) => {
                 const sa = SONGS[a], sb = SONGS[b];
                 if (songSortMode === 'title') return (sa.title || '').localeCompare(sb.title || '', 'zh-Hans');
-                if (songSortMode === 'duration') return (sa.durationSec || 0) - (sb.durationSec || 0);
+                if (songSortMode === 'duration') return (sb.durationSec || 0) - (sa.durationSec || 0);
                 if (songSortMode === 'difficulty') return (sa.difficulty || 1) - (sb.difficulty || 1);
+                // 默认：完整曲排前面，长的在前；其余按难度
+                if (!!sa.full !== !!sb.full) return sa.full ? -1 : 1;
+                if (sa.full && sb.full) return (sb.durationSec || 0) - (sa.durationSec || 0);
                 const da = sa.difficulty || 1, db = sb.difficulty || 1;
                 return difficultyLevel === 'novice' ? da - db : db - da;
             });
