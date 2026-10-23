@@ -1278,11 +1278,12 @@
             .song-fav { width: 26px; height: 26px; }
         }
 
-        /* 手机首屏优先键床：自由演奏时把音量/音名控件放到琴键之后 */
+        /* 手机首屏优先键床：自由演奏时把音量/音名控件放到琴键之后；
+           模式标签必须排在各模式面板之前 */
         @media (max-width: 768px) {
             .app-main > .app-intro { order: 0; }
             .app-main > .current-song-bar { order: 1; }
-            .app-main > .mode-tabs { order: 2; }
+            .app-main > .mode-tabs { order: 0; }
             .app-main > .piano-container { order: 3; }
             .app-main > .range-note { order: 4; }
             .app-main > .piano-scroll-hint { display: block; order: 4; }
@@ -1291,6 +1292,132 @@
             .app-main > .key-hint { order: 7; }
             .app-main > .songs-panel { order: 8; }
             .app-main > .site-footer { order: 9; }
+        }
+
+        /* 演奏模式的精选入口：默认只给 3 首，长列表按需展开 */
+        .practice-picks {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            width: 100%;
+        }
+        .practice-pick {
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: linear-gradient(150deg, rgba(255,255,255,0.075), rgba(255,255,255,0.02));
+            border-radius: 12px;
+            padding: 12px 13px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.18s;
+            position: relative;
+        }
+        .practice-pick:hover {
+            border-color: rgba(245,175,25,0.45);
+            background: rgba(245,175,25,0.08);
+            transform: translateY(-2px);
+        }
+        .practice-pick .pp-level {
+            display: block;
+            font-size: 10px;
+            color: #f5af19;
+            letter-spacing: 0.6px;
+            margin-bottom: 4px;
+        }
+        .practice-pick .pp-title {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .practice-pick .pp-sub {
+            display: block;
+            margin-top: 3px;
+            font-size: 10.5px;
+            color: rgba(255,255,255,0.4);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .practice-pick .pp-stars {
+            display: block;
+            margin-top: 7px;
+            font-size: 10px;
+            color: #f5af19;
+            letter-spacing: 1.5px;
+        }
+        .practice-pick .pp-go {
+            position: absolute;
+            right: 11px;
+            bottom: 10px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.45);
+        }
+        .practice-more-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin: 12px 0 2px;
+        }
+        .tutor-list-wrap {
+            width: 100%;
+            max-height: 380px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 8px;
+            background: rgba(255,255,255,0.025);
+        }
+        .tutor-list-tools {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            flex-wrap: wrap;
+            padding: 2px 2px 9px;
+            background: linear-gradient(180deg, #151827 70%, rgba(21,24,39,0.92));
+        }
+        .tutor-list-tools input[type="search"] {
+            flex: 1 1 150px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.13);
+            color: #fff;
+            border-radius: 8px;
+            padding: 7px 10px;
+            font-size: 12px;
+            outline: none;
+        }
+        .tutor-level-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+        .tutor-level-chips .filter-chip { padding: 5px 8px; font-size: 10px; }
+        .tutor-empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+            padding: 18px;
+        }
+        .song-more-row {
+            display: flex;
+            justify-content: center;
+            padding: 12px 0 2px;
+        }
+        @media (max-width: 768px) {
+            .practice-picks { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+            .practice-pick { padding: 9px 8px; border-radius: 10px; }
+            .practice-pick .pp-level { font-size: 8.5px; letter-spacing: 0.2px; }
+            .practice-pick .pp-title { font-size: 13px; }
+            .practice-pick .pp-sub { font-size: 9px; }
+            .practice-pick .pp-stars { font-size: 8px; letter-spacing: 0.5px; margin-top: 4px; }
+            .practice-pick .pp-go { display: none; }
+            .tutor-list-wrap { max-height: 52vh; }
+            .tutor-list { grid-template-columns: 1fr; }
+            .tutor-list-tools { position: sticky; top: 0; }
         }
 
         /* 键盘提示条：与琴键同宽，放在键床下方 */
@@ -1879,7 +2006,25 @@
                 <span id="playBackingVolValue">25</span>
                 <span class="play-rate-tip" id="levelHint">新手模式：默认慢速 + 幽灵手</span>
             </div>
-            <div class="tutor-list" id="tutorList"></div>
+            <div class="practice-picks" id="practicePicks"></div>
+            <div class="practice-more-row" id="practiceMoreRow">
+                <button class="btn" id="practiceMoreBtn" type="button">查看全部曲目</button>
+                <button class="btn" id="practiceRandomBtn" type="button">🎲 随机挑战</button>
+                <span class="play-rate-tip" id="practicePickHint">按当前难度推荐</span>
+            </div>
+            <div class="tutor-list-wrap" id="tutorListWrap" hidden>
+                <div class="tutor-list-tools">
+                    <input type="search" id="tutorSearch" placeholder="搜索曲名/作曲者…" aria-label="搜索全部曲目">
+                    <div class="tutor-level-chips" id="tutorLevelChips">
+                        <button type="button" class="filter-chip active" data-level="all">全部</button>
+                        <button type="button" class="filter-chip" data-level="1">新手</button>
+                        <button type="button" class="filter-chip" data-level="2">进阶</button>
+                        <button type="button" class="filter-chip" data-level="3">高手</button>
+                    </div>
+                    <button class="btn" id="tutorListClose" type="button">收起</button>
+                </div>
+                <div class="tutor-list" id="tutorList"></div>
+            </div>
             <div class="tutor-stage" id="tutorStage" hidden>
                 <div class="tutor-song" id="tutorSongName"></div>
                 <div class="tutor-hint">方块跟着音乐节拍往下掉，在它压到琴键的一瞬间按下对应琴键——越准分越高，伴奏永远不会停</div>
@@ -1903,7 +2048,7 @@
         </div>
 
         <div class="piano-container">
-            <div class="fall-lanes mode-panel" data-mode="tutor" id="fallLanes" hidden>
+            <div class="fall-lanes" id="fallLanes" hidden>
                 <div class="lane-heat" id="laneHeat"></div>
             </div>
             <div class="piano-wrap" id="pianoWrap">
@@ -1960,13 +2105,16 @@
             </div>
             <div class="song-list" id="songsGrid"></div>
             <div class="song-empty" id="songEmpty" hidden>没有找到匹配的曲目，换个关键词试试。</div>
+            <div class="song-more-row">
+                <button class="icon-btn" id="songListMoreBtn" type="button">显示全部曲目</button>
+            </div>
         </div>
 
         <footer class="site-footer">
             曲目均为公有领域作品/民歌，古典曲目为本项目简化编配或主题片段。<br>
             本地音频只在你的浏览器内解码，不会上传；Basic Pitch 扒谱同样在本机运行。<br>
             <a href="https://github.com/yangfanwudi/luoyin-pianofall" target="_blank" rel="noopener">GitHub 开源</a>
-            · 落音 PianoFall v4.0
+            · 落音 PianoFall v4.1
         </footer>
     </div>
 
@@ -2781,6 +2929,8 @@
         var favoritesOnly = false;
         var songFilter = { level: 'all', category: 'all', q: '' };
         var songSortMode = 'default';
+        var songListExpanded = false;
+        var SONG_PREVIEW_LIMIT = 8;
         var visibleSongIndices = [];
         var currentSongIndex = -1;
 
@@ -2891,13 +3041,33 @@
                 const da = sa.difficulty || 1, db = sb.difficulty || 1;
                 return difficultyLevel === 'novice' ? da - db : db - da;
             });
-            visibleSongIndices.forEach(index => {
+            const hasActiveFilter = favoritesOnly || !!songFilter.q ||
+                songFilter.level !== 'all' || songFilter.category !== 'all';
+            const showAll = songListExpanded || hasActiveFilter;
+            const shown = showAll ? visibleSongIndices : visibleSongIndices.slice(0, SONG_PREVIEW_LIMIT);
+            shown.forEach(index => {
                 grid.appendChild(buildSongRow(SONGS[index], index));
             });
+            // 列表重建（展开/收起/筛选）后把正在播放的高亮迁移到新行
+            if (playingSong && playingSong.dataset && playingSong.dataset.songId) {
+                const same = grid.querySelector('.song-row[data-song-id="' + playingSong.dataset.songId + '"]');
+                if (same) {
+                    same.classList.add('playing');
+                    playingSong = same;
+                }
+            }
             if (empty) empty.hidden = visibleSongIndices.length > 0;
             const count = document.getElementById('songCount');
             if (count) {
-                count.textContent = '共 ' + SONGS.length + ' 首 · 当前显示 ' + visibleSongIndices.length + ' 首 · 全部公有领域/民歌';
+                count.textContent = '共 ' + SONGS.length + ' 首 · 当前显示 ' +
+                    (showAll ? visibleSongIndices.length : shown.length) + ' 首 · 全部公有领域/民歌';
+            }
+            const moreBtn = document.getElementById('songListMoreBtn');
+            if (moreBtn) {
+                moreBtn.hidden = hasActiveFilter || visibleSongIndices.length <= SONG_PREVIEW_LIMIT;
+                moreBtn.textContent = songListExpanded
+                    ? '收起列表'
+                    : ('显示全部 ' + visibleSongIndices.length + ' 首');
             }
         }
 
@@ -2948,9 +3118,21 @@
                         return;
                     }
                     const pick = visibleSongIndices[Math.floor(Math.random() * visibleSongIndices.length)];
-                    const row = document.querySelector('.song-row[data-song-index="' + pick + '"]');
+                    let row = document.querySelector('.song-row[data-song-index="' + pick + '"]');
+                    if (!row) {
+                        songListExpanded = true;
+                        rebuildSongLibrary();
+                        row = document.querySelector('.song-row[data-song-index="' + pick + '"]');
+                    }
                     playSong(pick, row);
                     if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
+            const moreBtn = document.getElementById('songListMoreBtn');
+            if (moreBtn) {
+                moreBtn.addEventListener('click', () => {
+                    songListExpanded = !songListExpanded;
+                    rebuildSongLibrary();
                 });
             }
             rebuildSongLibrary();
@@ -2972,6 +3154,7 @@
         }
 
         function playSong(index, btnEl) {
+            if (!btnEl) return;
             initAudio();
             if (audioCtx.state === 'suspended') audioCtx.resume();
 
@@ -3728,15 +3911,89 @@
             setTimeout(() => el.classList.remove('hit-ping'), 380);
         }
 
+        var tutorFilter = { q: '', level: 'all' };
+        var tutorListOpen = false;
+
+        function tutorSongMatches(song) {
+            if (tutorFilter.level !== 'all' && String(song.difficulty) !== String(tutorFilter.level)) return false;
+            if (tutorFilter.q) {
+                const hay = (song.title + ' ' + song.composer + ' ' + song.category).toLowerCase();
+                if (hay.indexOf(tutorFilter.q.toLowerCase()) < 0) return false;
+            }
+            return true;
+        }
+
+        function buildPracticePicks() {
+            const host = document.getElementById('practicePicks');
+            if (!host) return;
+            host.innerHTML = '';
+            const names = difficultyLevel === 'expert'
+                ? ['月光', '土耳其进行曲', '命运交响曲']
+                : ['小星星', '欢乐颂', '两只老虎'];
+            const picked = [];
+            names.forEach(name => {
+                const idx = findSongByTitle(name);
+                if (idx >= 0 && picked.indexOf(idx) < 0) picked.push(idx);
+            });
+            // 如果曲库缺推荐曲，补当前难度最高的几首
+            if (picked.length < 3) {
+                SONGS.map((song, index) => index)
+                    .filter(index => picked.indexOf(index) < 0)
+                    .sort((a, b) => (SONGS[b].difficulty || 1) - (SONGS[a].difficulty || 1))
+                    .forEach(index => { if (picked.length < 3) picked.push(index); });
+            }
+            picked.slice(0, 3).forEach(index => {
+                const song = SONGS[index];
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'practice-pick';
+                btn.dataset.songIndex = index;
+                const level = document.createElement('span');
+                level.className = 'pp-level';
+                level.textContent = (difficultyLevel === 'expert' ? '高手推荐' : '新手推荐') + ' · ' + difficultyStars(song.difficulty);
+                const title = document.createElement('span');
+                title.className = 'pp-title';
+                title.textContent = song.title;
+                const sub = document.createElement('span');
+                sub.className = 'pp-sub';
+                sub.textContent = (song.composer || '传统') + ' · ' + formatDuration(song.durationSec);
+                const stars = document.createElement('span');
+                stars.className = 'pp-stars';
+                stars.textContent = difficultyStars(song.difficulty);
+                const go = document.createElement('span');
+                go.className = 'pp-go';
+                go.textContent = '开始 ▶';
+                btn.appendChild(level);
+                btn.appendChild(title);
+                btn.appendChild(sub);
+                btn.appendChild(stars);
+                btn.appendChild(go);
+                btn.addEventListener('click', () => startGuide(index));
+                host.appendChild(btn);
+            });
+            const hint = document.getElementById('practicePickHint');
+            if (hint) hint.textContent = difficultyLevel === 'expert' ? '高手向：原速 + 严格判定' : '新手向：慢速 + 幽灵手';
+            const more = document.getElementById('practiceMoreBtn');
+            if (more) more.textContent = tutorListOpen ? '收起全部曲目' : ('查看全部 ' + SONGS.length + ' 首');
+        }
+
         function buildTutorList() {
             const list = document.getElementById('tutorList');
             if (!list) return;
             list.innerHTML = '';
-            const indices = SONGS.map((song, index) => index);
+            const indices = SONGS.map((song, index) => index)
+                .filter(index => tutorSongMatches(SONGS[index]));
             indices.sort((a, b) => {
                 if (difficultyLevel === 'novice') return (SONGS[a].difficulty || 1) - (SONGS[b].difficulty || 1);
                 return (SONGS[b].difficulty || 1) - (SONGS[a].difficulty || 1);
             });
+            if (!indices.length) {
+                const empty = document.createElement('div');
+                empty.className = 'tutor-empty';
+                empty.textContent = '没有匹配的曲目';
+                list.appendChild(empty);
+                return;
+            }
             indices.forEach(index => {
                 const song = SONGS[index];
                 const stars = song.difficulty || 1;
@@ -3773,6 +4030,51 @@
             });
         }
 
+        function setTutorListOpen(open) {
+            tutorListOpen = open;
+            const wrap = document.getElementById('tutorListWrap');
+            const more = document.getElementById('practiceMoreBtn');
+            if (wrap) wrap.hidden = !open;
+            if (more) more.textContent = open ? '收起全部曲目' : ('查看全部 ' + SONGS.length + ' 首');
+            if (open) {
+                buildTutorList();
+                if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function randomPracticeSong() {
+            const pool = SONGS.map((song, index) => index)
+                .filter(index => difficultyLevel === 'novice'
+                    ? (SONGS[index].difficulty || 1) <= 2
+                    : (SONGS[index].difficulty || 1) >= 2);
+            const use = pool.length ? pool : SONGS.map((song, index) => index);
+            if (!use.length) return;
+            startGuide(use[Math.floor(Math.random() * use.length)]);
+        }
+
+        function wirePracticeUI() {
+            const more = document.getElementById('practiceMoreBtn');
+            if (more) more.addEventListener('click', () => setTutorListOpen(!tutorListOpen));
+            const close = document.getElementById('tutorListClose');
+            if (close) close.addEventListener('click', () => setTutorListOpen(false));
+            const random = document.getElementById('practiceRandomBtn');
+            if (random) random.addEventListener('click', randomPracticeSong);
+            const search = document.getElementById('tutorSearch');
+            if (search) {
+                search.addEventListener('input', () => {
+                    tutorFilter.q = search.value.trim();
+                    buildTutorList();
+                });
+            }
+            document.querySelectorAll('#tutorLevelChips .filter-chip').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tutorFilter.level = btn.dataset.level;
+                    document.querySelectorAll('#tutorLevelChips .filter-chip').forEach(b => b.classList.toggle('active', b === btn));
+                    buildTutorList();
+                });
+            });
+        }
+
         function startGuide(index) {
             stopAll();
             const song = SONGS[index];
@@ -3806,8 +4108,12 @@
             play.events.forEach(ev => { ev.time = play.startTime + ev.beat * play.beatMs / 1000; });
             play.support = buildSupport(song, play.beatMs, play.startTime, beat);
             applyBackingVolume(parseInt(document.getElementById('playBackingVol').value, 10));
+            const fallLayer = document.getElementById('fallLanes');
+            if (fallLayer) fallLayer.hidden = false;
             buildPlayBlocks();
-            document.getElementById('tutorList').hidden = true;
+            document.getElementById('practicePicks').hidden = true;
+            document.getElementById('practiceMoreRow').hidden = true;
+            document.getElementById('tutorListWrap').hidden = true;
             document.getElementById('tutorStage').hidden = false;
             document.getElementById('tutorDone').hidden = true;
             document.getElementById('tutorDoneRow').hidden = true;
@@ -3959,8 +4265,11 @@
             play.schedulerTimer = null;
             restoreBackingVolume(); // 三条总线恢复原电平，别影响"播放/自动伴奏"模式
             const layer = document.getElementById('fallLanes');
-            if (layer) layer.querySelectorAll('.fall-note, .judge-pop, .hit-ring, .hit-particle, .milestone-pop')
-                .forEach(el => el.remove());
+            if (layer) {
+                layer.querySelectorAll('.fall-note, .judge-pop, .hit-ring, .hit-particle, .milestone-pop')
+                    .forEach(el => el.remove());
+                layer.hidden = true;
+            }
             const heat = document.getElementById('laneHeat');
             if (heat) heat.style.opacity = 0;
             const comboEl = document.getElementById('tutorCombo');
@@ -3976,14 +4285,20 @@
                 tutorFeedbackTimer = null;
             }
             clearTargetHighlight();
-            const list = document.getElementById('tutorList');
             const stage = document.getElementById('tutorStage');
             const done = document.getElementById('tutorDone');
             const row = document.getElementById('tutorDoneRow');
-            if (list) list.hidden = false;
+            const picks = document.getElementById('practicePicks');
+            const moreRow = document.getElementById('practiceMoreRow');
+            const listWrap = document.getElementById('tutorListWrap');
+            if (picks) picks.hidden = false;
+            if (moreRow) moreRow.hidden = false;
+            if (listWrap) listWrap.hidden = true;
             if (stage) stage.hidden = true;
             if (done) done.hidden = true;
             if (row) row.hidden = true;
+            tutorListOpen = false;
+            buildPracticePicks();
         }
 
         // ================================================================
@@ -4106,6 +4421,7 @@
             }
             buildKeymapRail();
             syncDifficultyUI();
+            buildPracticePicks();
             buildTutorList();
             rebuildSongLibrary();
             if (currentMode === 'tutor' && play.active) {
@@ -4337,6 +4653,8 @@
         setNoteSystem(appSettings.noteSystem, true);
         setKeyHints(appSettings.keyHints, true);
         setDifficulty(appSettings.difficulty, true);
+        buildPracticePicks();
+        wirePracticeUI();
         buildTutorList();
         updateRangeNote();
 
@@ -4351,8 +4669,10 @@
             addImportedSong: function (song) {
                 SONGS.push(song);
                 normalizeSongs();
+                songListExpanded = true;
                 rebuildSongLibrary();
                 buildTutorList();
+                buildPracticePicks();
                 return SONGS.length - 1;
             },
             startSong: function (index) {
