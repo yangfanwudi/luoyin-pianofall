@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>落音 PianoFall · 在线钢琴与智能练习</title>
-    <meta name="description" content="零基础也能弹一首像样的曲子。在线钢琴、新手/高手双模式、27 首公有领域曲目、本地音频伴奏与智能扒谱，所有音频只在本机处理。">
+    <meta name="description" content="零基础也能弹一首像样的曲子。在线钢琴、新手/高手双模式、41 首公有领域曲目、本地音频伴奏与智能扒谱，所有音频只在本机处理。">
     <meta name="theme-color" content="#0a0a0f">
     <meta name="color-scheme" content="dark">
     <meta name="Apple-mobile-web-app-capable" content="yes">
@@ -14,14 +14,14 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="落音 PianoFall">
     <meta property="og:title" content="落音 PianoFall · 在线钢琴与智能练习">
-    <meta property="og:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、27 首公有领域曲目、本地音频伴奏与智能扒谱。">
+    <meta property="og:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、41 首公有领域曲目、本地音频伴奏与智能扒谱。">
     <meta property="og:url" content="https://yangfanwudi.github.io/luoyin-pianofall/">
     <meta property="og:image" content="https://yangfanwudi.github.io/luoyin-pianofall/assets/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="落音 PianoFall · 在线钢琴与智能练习">
-    <meta name="twitter:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、27 首公有领域曲目、本地音频伴奏与智能扒谱。">
+    <meta name="twitter:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、41 首公有领域曲目、本地音频伴奏与智能扒谱。">
     <meta name="twitter:image" content="https://yangfanwudi.github.io/luoyin-pianofall/assets/og-image.png">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -945,7 +945,7 @@
             color: #f5af19;
         }
         /* ============================================================
-           v4.0 网站层：导航 / Hero / 曲库 / 设置 / 导入 / 分享
+           v4.0 网站层：导航 / 首屏 / 曲库 / 设置 / 导入 / 分享
            ============================================================ */
         .topbar {
             position: sticky;
@@ -1031,72 +1031,6 @@
 
         .icon-btn:hover { background: rgba(255,255,255,0.13); }
 
-        .hero {
-            width: min(1180px, 100%);
-            padding: 34px 20px 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: clamp(26px, 4vw, 42px);
-            line-height: 1.18;
-            letter-spacing: -0.5px;
-            text-wrap: balance;
-            background: linear-gradient(120deg, #fff 15%, #f5af19 55%, #ff6a3d 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            max-width: 860px;
-        }
-
-        .hero > p {
-            margin-top: 10px;
-            font-size: 14px;
-            color: rgba(255,255,255,0.5);
-            max-width: 720px;
-            line-height: 1.7;
-        }
-
-        .quick-cards {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .quick-card {
-            text-align: left;
-            min-width: 210px;
-            padding: 13px 18px;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: linear-gradient(150deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .quick-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(245,175,25,0.55);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-        }
-
-        .quick-card span {
-            display: block;
-            font-size: 11px;
-            color: #f5af19;
-            letter-spacing: 0.6px;
-            margin-bottom: 3px;
-        }
-
-        .quick-card b { font-size: 19px; display: block; }
-        .quick-card small { display: block; margin-top: 3px; font-size: 11px; color: rgba(255,255,255,0.42); }
-
         .app-main {
             width: 100%;
             display: flex;
@@ -1104,8 +1038,38 @@
             align-items: center;
         }
 
-        /* 演奏模式聚焦键床：收起首屏营销区和频谱，给下落方块留空间 */
-        body[data-mode="tutor"] .hero { display: none; }
+        .app-intro {
+            width: min(1180px, 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            text-align: center;
+            padding: 16px 20px 4px;
+        }
+
+        .app-intro-copy b {
+            display: block;
+            font-size: 17px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 0.2px;
+        }
+
+        .app-intro-copy span {
+            display: block;
+            margin-top: 3px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .install-btn {
+            border-color: rgba(245,175,25,0.45);
+            color: #f5af19;
+        }
+
+        /* 演奏模式聚焦键床：收起首屏说明和频谱，给下落方块留空间 */
+        body[data-mode="tutor"] .app-intro { display: none; }
         body[data-mode="tutor"] .visualizer { display: none; }
         body[data-mode="tutor"] .site-footer { padding-top: 18px; }
 
@@ -1166,70 +1130,6 @@
             background: rgba(245,175,25,0.12);
         }
 
-        .song-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(184px, 1fr));
-            gap: 10px;
-        }
-
-        .song-card {
-            position: relative;
-            text-align: left;
-            padding: 12px 13px 11px;
-            border-radius: 11px;
-            border: 1px solid rgba(255,255,255,0.09);
-            background: rgba(255,255,255,0.045);
-            color: rgba(255,255,255,0.86);
-            cursor: pointer;
-            transition: all 0.18s;
-            min-height: 86px;
-        }
-
-        .song-card:hover {
-            background: rgba(245,175,25,0.10);
-            border-color: rgba(245,175,25,0.4);
-            transform: translateY(-2px);
-        }
-
-        .song-card.playing {
-            border-color: #f5af19;
-            background: rgba(245,175,25,0.14);
-            box-shadow: 0 0 0 2px rgba(245,175,25,0.18);
-        }
-
-        .song-card .sc-title {
-            font-size: 14px;
-            font-weight: 650;
-            line-height: 1.35;
-            margin-bottom: 4px;
-        }
-
-        .song-card .sc-meta {
-            font-size: 11px;
-            color: rgba(255,255,255,0.42);
-            line-height: 1.5;
-        }
-
-        .song-card .sc-stars {
-            color: #f5af19;
-            letter-spacing: 2px;
-            font-size: 10px;
-            margin-top: 5px;
-        }
-
-        .song-card .sc-tag {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 5px;
-            background: rgba(255,255,255,0.08);
-            color: rgba(255,255,255,0.5);
-        }
-
-        .song-card .sc-tag.imported { color: #7cc4ff; background: rgba(124,196,255,0.12); }
-
         .song-empty {
             grid-column: 1 / -1;
             color: rgba(255,255,255,0.4);
@@ -1238,6 +1138,159 @@
             text-align: center;
             border: 1px dashed rgba(255,255,255,0.12);
             border-radius: 10px;
+        }
+
+        /* v4.1 曲目查询列表 */
+        .songs-panel { max-width: 1100px; }
+        .songs-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .songs-head .songs-title { margin-bottom: 4px; font-size: 20px; }
+        .songs-sub { font-size: 11px; color: rgba(255,255,255,0.4); }
+        .songs-head-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .song-toolbar select {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #fff;
+            border-radius: 999px;
+            padding: 8px 11px;
+            font-size: 12px;
+            outline: none;
+        }
+        .song-list-head {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 82px 72px 62px 118px;
+            gap: 10px;
+            padding: 0 14px 7px;
+            font-size: 10px;
+            letter-spacing: 0.8px;
+            color: rgba(255,255,255,0.3);
+        }
+        .song-list-head span:not(:first-child) { text-align: center; }
+        .song-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .song-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 82px 72px 62px 118px;
+            gap: 10px;
+            align-items: center;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.075);
+            background: rgba(255,255,255,0.035);
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .song-row:hover { background: rgba(245,175,25,0.07); border-color: rgba(245,175,25,0.25); }
+        .song-row.playing {
+            border-color: #f5af19;
+            background: rgba(245,175,25,0.12);
+            box-shadow: 0 0 0 2px rgba(245,175,25,0.16);
+        }
+        .song-main {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            background: none;
+            border: 0;
+            color: #fff;
+            cursor: pointer;
+            text-align: left;
+            padding: 2px 0;
+            font: inherit;
+        }
+        .song-main:hover .sr-title { color: #f5af19; }
+        .sr-title {
+            font-size: 14px;
+            font-weight: 650;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        .sr-sub {
+            font-size: 10.5px;
+            color: rgba(255,255,255,0.42);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        .song-diff, .song-key, .song-dur {
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255,255,255,0.55);
+            white-space: nowrap;
+        }
+        .song-diff { color: #f5af19; letter-spacing: 1.5px; font-size: 10px; }
+        .song-actions { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+        .song-practice {
+            border: 1px solid rgba(245,175,25,0.35);
+            background: rgba(245,175,25,0.08);
+            color: #f5af19;
+            border-radius: 7px;
+            padding: 5px 9px;
+            font-size: 11px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .song-practice:hover { background: rgba(245,175,25,0.2); }
+        .song-fav {
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.5);
+            border-radius: 7px;
+            width: 28px;
+            height: 27px;
+            padding: 0;
+            font-size: 14px;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .song-fav.on { color: #f5af19; border-color: rgba(245,175,25,0.45); background: rgba(245,175,25,0.1); }
+        .song-fav:hover { border-color: rgba(245,175,25,0.4); }
+
+        @media (max-width: 768px) {
+            .songs-head { align-items: flex-start; }
+            .songs-head .songs-title { font-size: 18px; }
+            .songs-head-actions { width: 100%; }
+            .songs-head-actions .icon-btn { flex: 1 1 auto; }
+            .song-toolbar { gap: 7px; }
+            .song-toolbar input[type="search"] { flex-basis: 100%; }
+            .song-list-head { display: none; }
+            .song-row {
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 8px;
+                padding: 9px 11px;
+            }
+            .song-diff, .song-key, .song-dur { display: none; }
+            .song-actions { gap: 5px; }
+            .song-practice { padding: 5px 7px; font-size: 10px; }
+            .song-fav { width: 26px; height: 26px; }
+        }
+
+        /* 手机首屏优先键床：自由演奏时把音量/音名控件放到琴键之后 */
+        @media (max-width: 768px) {
+            .app-main > .app-intro { order: 0; }
+            .app-main > .current-song-bar { order: 1; }
+            .app-main > .mode-tabs { order: 2; }
+            .app-main > .piano-container { order: 3; }
+            .app-main > .range-note { order: 4; }
+            .app-main > .piano-scroll-hint { display: block; order: 4; }
+            .app-main > .controls { order: 5; }
+            .app-main > .visualizer { order: 6; }
+            .app-main > .key-hint { order: 7; }
+            .app-main > .songs-panel { order: 8; }
+            .app-main > .site-footer { order: 9; }
         }
 
         /* 键盘提示条：与琴键同宽，放在键床下方 */
@@ -1305,6 +1358,16 @@
         }
 
         .range-note b { color: rgba(245,175,25,0.85); font-weight: 600; }
+
+        .piano-scroll-hint {
+            display: none;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            color: rgba(255,255,255,0.28);
+            padding: 0 16px 4px;
+            letter-spacing: 1px;
+        }
 
         .key-white .key-label,
         .key-black .key-label { display: none !important; }
@@ -1682,11 +1745,6 @@
             .topbar-actions { gap: 6px; }
             .icon-btn { padding: 6px 9px; font-size: 12px; }
             .difficulty-switch button { padding: 5px 10px; font-size: 12px; }
-            .hero { padding-top: 24px; }
-            .hero h1 { font-size: 24px; }
-            .quick-cards { width: 100%; }
-            .quick-card { flex: 1 1 150px; min-width: 0; }
-            .song-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
             .keymap-rail { display: none; }
             .range-note { font-size: 11px; }
             .song-toolbar { gap: 8px; }
@@ -1715,18 +1773,13 @@
     </nav>
 
     <div class="app-main">
-        <header class="hero">
-            <h1>零基础，也能弹一首像样的曲子</h1>
-            <p>在线钢琴 · 新手/高手双模式 · 27 首公有领域曲目 · 本地音频伴奏与智能扒谱，所有声音只在你自己的浏览器里处理。</p>
-            <div class="quick-cards">
-                <button class="quick-card" type="button" data-quick="novice">
-                    <span>新手 · ★</span><b>小星星</b><small>从 8 个音开始，慢速也能跟上</small>
-                </button>
-                <button class="quick-card" type="button" data-quick="expert">
-                    <span>高手 · ★★★</span><b>月光</b><small>贝多芬 · 简化版，挑战原速</small>
-                </button>
+        <div class="app-intro">
+            <div class="app-intro-copy">
+                <b>点一下琴键，直接开始</b>
+                <span>41 首公有领域曲目 · 本地音频不上传 · 可安装到桌面</span>
             </div>
-        </header>
+            <button class="icon-btn install-btn" id="installBtn" type="button" hidden>安装 App</button>
+        </div>
 
         <div class="current-song-bar" id="currentSongBar" hidden>
             <span>当前曲目：<b id="currentSongName"></b></span>
@@ -1862,6 +1915,7 @@
         <div class="range-note" id="rangeNote">
             <b>本页音域：c – b2</b> · 中央C = c1 · 完整钢琴为 A0–C8，本页只展示三个八度
         </div>
+        <div class="piano-scroll-hint">← 左右滑动琴键 →</div>
 
         <canvas class="visualizer" id="visualizer" aria-label="音频频谱" hidden></canvas>
 
@@ -1870,14 +1924,23 @@
         </div>
 
         <div class="songs-panel mode-panel" data-mode="free" id="songLibrary">
-            <div class="songs-title">🎵 曲库 <span id="songCount" style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:400;"></span></div>
+            <div class="songs-head">
+                <div>
+                    <div class="songs-title">🎼 曲目库</div>
+                    <div class="songs-sub" id="songCount">全部为公有领域作品 · 可搜索、筛选、收藏</div>
+                </div>
+                <div class="songs-head-actions">
+                    <button class="icon-btn" id="randomSongBtn" type="button">🎲 随机一首</button>
+                    <button class="icon-btn" id="favoritesFilterBtn" type="button" aria-pressed="false">☆ 我的收藏</button>
+                </div>
+            </div>
             <div class="song-toolbar">
-                <input type="search" id="songSearch" placeholder="搜索曲名、作曲者…" aria-label="搜索曲目">
+                <input type="search" id="songSearch" placeholder="搜索曲名、作曲者、分类…" aria-label="搜索曲目">
                 <button class="filter-chip active" type="button" data-level="all">全部</button>
                 <button class="filter-chip" type="button" data-level="1">新手</button>
                 <button class="filter-chip" type="button" data-level="2">进阶</button>
                 <button class="filter-chip" type="button" data-level="3">高手</button>
-                <select id="songCategory" aria-label="曲目分类" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;">
+                <select id="songCategory" aria-label="曲目分类">
                     <option value="all">全部分类</option>
                     <option value="儿歌">儿歌</option>
                     <option value="民歌">民歌</option>
@@ -1885,9 +1948,18 @@
                     <option value="练习">练习</option>
                     <option value="导入">导入</option>
                 </select>
+                <select id="songSort" aria-label="排序方式">
+                    <option value="default">默认排序</option>
+                    <option value="difficulty">按难度</option>
+                    <option value="title">按曲名</option>
+                    <option value="duration">按时长</option>
+                </select>
             </div>
-            <div class="song-grid" id="songsGrid"></div>
-            <div class="song-empty" id="songEmpty" hidden>没有找到匹配的曲目</div>
+            <div class="song-list-head" aria-hidden="true">
+                <span>曲目</span><span>难度</span><span>调性</span><span>时长</span><span>操作</span>
+            </div>
+            <div class="song-list" id="songsGrid"></div>
+            <div class="song-empty" id="songEmpty" hidden>没有找到匹配的曲目，换个关键词试试。</div>
         </div>
 
         <footer class="site-footer">
@@ -2055,6 +2127,7 @@
     <script src="js/config.js"></script>
     <script src="js/songs.js"></script>
     <script src="js/songs-extra.js"></script>
+    <script src="js/songs-more.js"></script>
     <script src="js/import.js"></script>
     <script>
         // ========== 音频引擎 ==========
@@ -2655,45 +2728,6 @@
             releaseNote(noteId);
         }
 
-        // 只排一个 pass 的和声，playNext 换段时再排下一遍。
-        // 不能在这里循环 repeat：playNext 换段还会再调一次，会导致和声重复、
-        // 曲终后残留一整段没有旋律的"幽灵伴奏"
-        function scheduleHarmony(song, pass = 0) {
-            // 标了 harmonyOff 的经典曲目只放纯旋律；harmony 数据保留在曲目里，想加回来删掉标记即可
-            if (song.harmonyOff) return;
-            const pattern = song.harmony || [];
-            const cycle = song.harmonyCycle || 16;
-            const passBeats = song.notes.reduce((sum, item) => sum + (item[2] || 1), 0);
-            const fade = Math.min(1, 0.45 + pass * 0.35);
-
-            for (let offset = 0; offset < passBeats; offset += cycle) {
-                pattern.forEach(event => {
-                    const eventBeat = offset + event.at;
-                    if (eventBeat >= passBeats) return;
-
-                    const startId = setTimeout(() => {
-                        event.notes.forEach(([note, octave]) => {
-                            const noteId = `${note}${octave}`;
-                            activeHarmonyNotes.add(noteId);
-                            pressKey(noteId, note, octave, true);
-                        });
-
-                        const releaseId = setTimeout(() => {
-                            event.notes.forEach(([note, octave]) => {
-                                const noteId = `${note}${octave}`;
-                                // 被旋律抢走的音（playNote 的抢占逻辑已删标记）跳过释放
-                                if (activeHarmonyNotes.delete(noteId)) releaseScheduledNote(noteId);
-                            });
-                        }, song.tempo * event.dur * 0.9 * fade);
-
-                        harmonyTimeouts.push(releaseId);
-                    }, song.tempo * eventBeat);
-
-                    harmonyTimeouts.push(startId);
-                });
-            }
-        }
-
         // 曲库元数据：现有 10 首按原名补全；新曲目自带字段。
         var SONG_META = {
             '小星星': { id: 'twinkle', title: '小星星', composer: '法国民谣', category: '儿歌', difficulty: 1, key: 'C', source: '传统 / Doinu (MIT)' },
@@ -2736,11 +2770,26 @@
             return m ? (m + ':' + String(s).padStart(2, '0')) : (s + '秒');
         }
 
+        var FAVORITES_KEY = 'luoyin.favorites.v1';
+        var favorites = (function () {
+            try {
+                var raw = localStorage.getItem(FAVORITES_KEY);
+                var arr = raw ? JSON.parse(raw) : [];
+                return new Set(Array.isArray(arr) ? arr : []);
+            } catch (e) { return new Set(); }
+        })();
+        var favoritesOnly = false;
         var songFilter = { level: 'all', category: 'all', q: '' };
+        var songSortMode = 'default';
         var visibleSongIndices = [];
         var currentSongIndex = -1;
 
+        function saveFavorites() {
+            try { localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.from(favorites))); } catch (e) {}
+        }
+
         function songMatches(song) {
+            if (favoritesOnly && !favorites.has(song.id)) return false;
             if (songFilter.level !== 'all' && String(song.difficulty) !== String(songFilter.level)) return false;
             if (songFilter.category !== 'all' && song.category !== songFilter.category) return false;
             if (songFilter.q) {
@@ -2750,25 +2799,79 @@
             return true;
         }
 
-        function escapeHtml(s) {
-            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
-                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-            }[c]));
-        }
+        function buildSongRow(song, index) {
+            const row = document.createElement('div');
+            row.className = 'song-row';
+            row.dataset.songIndex = index;
+            row.dataset.songId = song.id;
 
-        function buildSongCard(song, index) {
-            const btn = document.createElement('button');
-            btn.className = 'song-card';
-            btn.type = 'button';
-            btn.dataset.songIndex = index;
-            btn.dataset.songId = song.id;
-            btn.innerHTML =
-                '<span class="sc-tag">' + escapeHtml(song.imported ? '导入' : song.category) + '</span>' +
-                '<div class="sc-title">' + escapeHtml(song.title) + '</div>' +
-                '<div class="sc-meta">' + escapeHtml(song.composer + ' · ' + song.key + ' · ' + formatDuration(song.durationSec)) + '</div>' +
-                '<div class="sc-stars">' + difficultyStars(song.difficulty) + '</div>';
-            btn.addEventListener('click', () => playSong(index, btn));
-            return btn;
+            const main = document.createElement('button');
+            main.type = 'button';
+            main.className = 'song-main';
+            const title = document.createElement('span');
+            title.className = 'sr-title';
+            title.textContent = song.title;
+            const sub = document.createElement('span');
+            sub.className = 'sr-sub';
+            sub.textContent = (song.composer || '传统') + ' · ' + (song.imported ? '本地导入' : song.category);
+            main.appendChild(title);
+            main.appendChild(sub);
+            main.addEventListener('click', () => playSong(index, row));
+
+            const diff = document.createElement('span');
+            diff.className = 'song-diff';
+            diff.textContent = difficultyStars(song.difficulty);
+
+            const key = document.createElement('span');
+            key.className = 'song-key';
+            key.textContent = song.key || '—';
+
+            const dur = document.createElement('span');
+            dur.className = 'song-dur';
+            dur.textContent = formatDuration(song.durationSec);
+
+            const actions = document.createElement('span');
+            actions.className = 'song-actions';
+            const practice = document.createElement('button');
+            practice.type = 'button';
+            practice.className = 'song-practice';
+            practice.textContent = '▶ 练习';
+            practice.setAttribute('aria-label', '练习 ' + song.title);
+            practice.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeAllModals();
+                setMode('tutor');
+                startGuide(index);
+            });
+            const fav = document.createElement('button');
+            fav.type = 'button';
+            fav.className = 'song-fav' + (favorites.has(song.id) ? ' on' : '');
+            fav.textContent = favorites.has(song.id) ? '★' : '☆';
+            fav.setAttribute('aria-label', (favorites.has(song.id) ? '取消收藏 ' : '收藏 ') + song.title);
+            fav.setAttribute('aria-pressed', favorites.has(song.id) ? 'true' : 'false');
+            fav.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (favorites.has(song.id)) favorites.delete(song.id); else favorites.add(song.id);
+                saveFavorites();
+                fav.classList.toggle('on', favorites.has(song.id));
+                fav.textContent = favorites.has(song.id) ? '★' : '☆';
+                fav.setAttribute('aria-pressed', favorites.has(song.id) ? 'true' : 'false');
+                if (favoritesOnly) rebuildSongLibrary();
+            });
+            actions.appendChild(practice);
+            actions.appendChild(fav);
+
+            row.appendChild(main);
+            row.appendChild(diff);
+            row.appendChild(key);
+            row.appendChild(dur);
+            row.appendChild(actions);
+            // 点行内空白/元数据也能试听；操作按钮不冒泡触发
+            row.addEventListener('click', (e) => {
+                if (e.target.closest('.song-actions') || e.target.closest('.song-main')) return;
+                playSong(index, row);
+            });
+            return row;
         }
 
         function rebuildSongLibrary() {
@@ -2781,17 +2884,21 @@
                 if (songMatches(song)) visibleSongIndices.push(index);
             });
             visibleSongIndices.sort((a, b) => {
-                const da = SONGS[a].difficulty || 1;
-                const db = SONGS[b].difficulty || 1;
-                if (difficultyLevel === 'novice') return da - db;
-                return db - da;
+                const sa = SONGS[a], sb = SONGS[b];
+                if (songSortMode === 'title') return (sa.title || '').localeCompare(sb.title || '', 'zh-Hans');
+                if (songSortMode === 'duration') return (sa.durationSec || 0) - (sb.durationSec || 0);
+                if (songSortMode === 'difficulty') return (sa.difficulty || 1) - (sb.difficulty || 1);
+                const da = sa.difficulty || 1, db = sb.difficulty || 1;
+                return difficultyLevel === 'novice' ? da - db : db - da;
             });
             visibleSongIndices.forEach(index => {
-                grid.appendChild(buildSongCard(SONGS[index], index));
+                grid.appendChild(buildSongRow(SONGS[index], index));
             });
             if (empty) empty.hidden = visibleSongIndices.length > 0;
             const count = document.getElementById('songCount');
-            if (count) count.textContent = '（' + visibleSongIndices.length + ' / ' + SONGS.length + '）';
+            if (count) {
+                count.textContent = '共 ' + SONGS.length + ' 首 · 当前显示 ' + visibleSongIndices.length + ' 首 · 全部公有领域/民歌';
+            }
         }
 
         function buildSongs() {
@@ -2814,6 +2921,36 @@
                 category.addEventListener('change', () => {
                     songFilter.category = category.value;
                     rebuildSongLibrary();
+                });
+            }
+            const sort = document.getElementById('songSort');
+            if (sort) {
+                sort.addEventListener('change', () => {
+                    songSortMode = sort.value;
+                    rebuildSongLibrary();
+                });
+            }
+            const favBtn = document.getElementById('favoritesFilterBtn');
+            if (favBtn) {
+                favBtn.addEventListener('click', () => {
+                    favoritesOnly = !favoritesOnly;
+                    favBtn.classList.toggle('active', favoritesOnly);
+                    favBtn.setAttribute('aria-pressed', favoritesOnly ? 'true' : 'false');
+                    favBtn.textContent = favoritesOnly ? '★ 我的收藏' : '☆ 我的收藏';
+                    rebuildSongLibrary();
+                });
+            }
+            const randomBtn = document.getElementById('randomSongBtn');
+            if (randomBtn) {
+                randomBtn.addEventListener('click', () => {
+                    if (!visibleSongIndices.length) {
+                        showToast('当前筛选没有曲目');
+                        return;
+                    }
+                    const pick = visibleSongIndices[Math.floor(Math.random() * visibleSongIndices.length)];
+                    const row = document.querySelector('.song-row[data-song-index="' + pick + '"]');
+                    playSong(pick, row);
+                    if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 });
             }
             rebuildSongLibrary();
@@ -2867,7 +3004,8 @@
             setCurrentSongBar(song);
             btnEl.classList.add('playing');
             playingSong = btnEl;
-            scheduleHarmony(song, 0);
+            // 自由演奏的“试听”只放主旋律，不自动叠加和声/伴奏。
+            // 和声只在「演奏模式」的 buildSupport 里出现；想要伴奏请用「自动伴奏」模式。
 
             let noteIdx = 0;
             let pass = 0;
@@ -2879,7 +3017,6 @@
                     if (pass < repeatCount) {
                         noteIdx = 0;
                         songTimeout = setTimeout(() => {
-                            scheduleHarmony(song, pass);
                             playNext();
                         }, song.tempo);
                         return;
@@ -4039,26 +4176,13 @@
             openShareModal();
         });
 
-        // 新手/高手快速入口：直接进入对应曲目的演奏模式
+        // 曲名查找：供 PWA 快捷方式 / ?quick= 参数使用
         function findSongByTitle(title) {
             for (let i = 0; i < SONGS.length; i++) {
                 if ((SONGS[i].title || SONGS[i].name) === title) return i;
             }
             return -1;
         }
-        document.querySelectorAll('[data-quick]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const level = btn.dataset.quick;
-                setDifficulty(level, true);
-                const index = findSongByTitle(level === 'novice' ? '小星星' : '月光');
-                setMode('tutor');
-                if (index >= 0) {
-                    startGuide(index);
-                } else {
-                    showToast('曲目尚未加载');
-                }
-            });
-        });
 
         // ================================================================
         // ========== 分享卡（Canvas） =====================================
@@ -4248,6 +4372,8 @@
                     noteSystem: noteSystem,
                     keyHints: keyHintsOn,
                     activeNotes: Array.from(activeNotes.keys()),
+                    activeHarmony: Array.from(activeHarmonyNotes),
+                    harmonyTimerCount: harmonyTimeouts.length,
                     playingSong: playingSong ? playingSong.dataset.songId : null,
                     playActive: play.active,
                     playInfo: play.active ? {
@@ -4344,8 +4470,42 @@
         // 支持 PWA 快捷方式 / 分享链接里的 ?quick=novice|expert
         const quickParam = new URLSearchParams(location.search).get('quick');
         if (quickParam === 'novice' || quickParam === 'expert') {
-            const quickBtn = document.querySelector('[data-quick="' + quickParam + '"]');
-            if (quickBtn) setTimeout(() => quickBtn.click(), 150);
+            setDifficulty(quickParam, true);
+            const quickIndex = findSongByTitle(quickParam === 'novice' ? '小星星' : '月光');
+            if (quickIndex >= 0) {
+                setMode('tutor');
+                setTimeout(() => startGuide(quickIndex), 200);
+            }
+        }
+
+        // 安装 App：Android/桌面 Chrome 触发原生安装提示；iOS Safari 给出“添加到主屏幕”说明。
+        let deferredInstallPrompt = null;
+        const installBtn = document.getElementById('installBtn');
+        const isStandalone = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches;
+        if (installBtn && !isStandalone) installBtn.hidden = false;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+            if (installBtn) installBtn.hidden = false;
+        });
+        window.addEventListener('appinstalled', () => {
+            deferredInstallPrompt = null;
+            if (installBtn) installBtn.hidden = true;
+            showToast('已安装，可从桌面图标直接打开');
+        });
+        if (installBtn) {
+            installBtn.addEventListener('click', async () => {
+                if (deferredInstallPrompt) {
+                    deferredInstallPrompt.prompt();
+                    const choice = await deferredInstallPrompt.userChoice;
+                    if (choice && choice.outcome === 'accepted') showToast('正在安装…');
+                    deferredInstallPrompt = null;
+                } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    showToast('Safari：点分享按钮 → 添加到主屏幕');
+                } else {
+                    showToast('Chrome/Edge：地址栏右侧安装图标，或菜单 → 安装应用');
+                }
+            });
         }
     </script>
 </body>

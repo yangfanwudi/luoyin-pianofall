@@ -1,7 +1,7 @@
 /* 落音 PianoFall v4.0 service worker
    目标：核心页面离线可用；Basic Pitch 等大文件首次使用后缓存。
    注意：GitHub Pages 子路径部署时必须用相对路径。 */
-const VERSION = 'luoyin-v4.0.0';
+const VERSION = 'luoyin-v4.1.0';
 const CORE = [
   './',
   './index.html',
@@ -9,6 +9,7 @@ const CORE = [
   './js/config.js',
   './js/songs.js',
   './js/songs-extra.js',
+  './js/songs-more.js',
   './js/import.js',
   './assets/favicon.svg',
   './assets/icon-192.png',

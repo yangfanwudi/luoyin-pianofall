@@ -8,14 +8,18 @@
 
 - 🎹 三个八度钢琴键床，鼠标、触摸、电脑键盘都能弹，支持刮奏与延音。
 - 🌱 **新手 / 高手** 双模式：新手慢速 + 宽判定 + 幽灵手补音 + 键盘提示；高手原速 + 严格判定。
-- 🎵 **27 首公有领域曲目**：儿歌、民歌、古典主题简化编配；可按难度、分类、关键词筛选。
+- 🎵 **41 首公有领域曲目**：儿歌、民歌、古典主题简化编配；支持搜索、难度/分类筛选、排序、收藏和随机一首。
 - 🎼 **演奏模式**：下落方块 + Perfect/Good/Miss 判定 + 连击 + 评级 + 成绩分享卡。
 - 🎧 **本地音频伴奏**：导入 mp3 / wav / m4a / ogg / flac，播放 / 循环 / 调速 / 音量，全部在浏览器内处理，不上传。
 - 🎼 **MIDI 导入**：拖入 `.mid` / `.midi`，自动提取主旋律并生成可练习谱。
 - ✨ **智能扒谱**：基于 Spotify Basic Pitch，在浏览器内把独奏/清唱音频识别成可练习旋律（首次需加载约 1 MB 模型）。
-- 📱 **PWA**：可安装到桌面/手机，二次打开离线可用。
+- 📱 **PWA / App**：可安装到桌面/手机，二次打开离线可用；顶栏「安装 App」按提示操作。
+- 🧩 **微信小程序壳**：`miniprogram/` 提供 WebView 外壳，填入 AppID + 配置业务域名后可在微信开发者工具导入（详见 `miniprogram/README.md`）。
 - 🎨 **音名体系**：小字组（中央C = c1，默认）、科学音高（C4）、Yamaha（C3）、唱名（do re mi）随时切换。
 - 🎚️ **音准**：十二平均律，A4=440Hz 可微调；提供 A4 试听与 C 大调音阶自检。
+
+> 自由演奏里的「试听」只放主旋律，不自动叠加和声/伴奏；伴奏只在「演奏模式」和「自动伴奏」中出现。
+
 
 ## 本地运行
 
@@ -43,7 +47,7 @@ python -m http.server 8765
 
 - 纯 HTML/CSS/JavaScript，无构建步骤；`site/` 即部署根目录。
 - Basic Pitch 的浏览器 bundle 由 `tools/bp` 下的 esbuild 脚本生成，放在 `site/vendor/basic-pitch/`，仅在使用智能扒谱时懒加载。
-- 曲库在 `site/js/songs.js`（原有 10 首）和 `site/js/songs-extra.js`（扩充曲目）。
+- 曲库在 `site/js/songs.js`（原有 10 首）、`site/js/songs-extra.js`（17 首）和 `site/js/songs-more.js`（14 首），共 41 首。
 
 ### 目录
 
@@ -51,14 +55,21 @@ python -m http.server 8765
 site/
 ├─ index.html
 ├─ js/config.js        音名 / 设置 / 难度 / 键位数据源
-├─ js/songs.js         曲库
-├─ js/songs-extra.js   扩充曲库
+├─ js/songs.js         曲库（10）
+├─ js/songs-extra.js   扩充曲库（17）
+├─ js/songs-more.js    第二批扩充（14）
 ├─ js/import.js        音频伴奏 / MIDI / Basic Pitch
 ├─ vendor/basic-pitch/ 懒加载扒谱 bundle + 模型
 ├─ assets/             图标 / OG 图 / favicon
 ├─ manifest.webmanifest
 └─ sw.js
 ```
+
+## App / 小程序
+
+- **PWA（推荐）**：手机/桌面浏览器打开站点，点顶栏「安装 App」或浏览器菜单“安装应用/添加到主屏幕”，即可像 App 一样全屏打开，二次打开可离线。
+- **微信小程序**：工作区根目录的 `miniprogram/` 是 WebView 外壳，需要你自己的 AppID 和“业务域名”配置（详见其中的 `README.md`）。纯套壳可能过不了审核，需按实际类目评估。
+- **原生 App**：当前交付为 PWA；如需 APK/IPA，可用 Capacitor 等工具把线上 URL 包进 WebView，再走签名/上架流程。
 
 ## 曲目与版权
 

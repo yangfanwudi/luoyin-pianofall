@@ -26,7 +26,7 @@ function loadSongs(Luoyin) {
   const context = { Luoyin, console };
   vm.createContext(context);
   vm.runInContext(
-    read('js/songs.js') + '\n' + read('js/songs-extra.js') +
+    read('js/songs.js') + '\n' + read('js/songs-extra.js') + '\n' + read('js/songs-more.js') +
     '\nglobalThis.__SONGS = SONGS;',
     context, { filename: 'songs.js' }
   );
@@ -88,7 +88,7 @@ export function run() {
   });
 
   const songs = loadSongs(L);
-  check('曲库数量 >= 24', () => assert.ok(songs.length >= 24, 'count=' + songs.length));
+  check('曲库数量 41', () => assert.equal(songs.length, 41));
   check('曲目数据完整', () => {
     const names = new Set(L.NOTE_NAMES);
     for (const s of songs) {
