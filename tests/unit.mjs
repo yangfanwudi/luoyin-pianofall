@@ -27,7 +27,7 @@ function loadSongs(Luoyin) {
   vm.createContext(context);
   vm.runInContext(
     read('js/songs.js') + '\n' + read('js/songs-extra.js') + '\n' + read('js/songs-more.js') +
-    '\n' + read('js/songs-library.js') + '\n' + read('js/songs-full.js') +
+    '\n' + read('js/songs-library.js') + '\n' + read('js/songs-full.js') + '\n' + read('js/songs-filter.js') +
     '\nglobalThis.__SONGS = SONGS;',
     context, { filename: 'songs.js' }
   );
@@ -89,10 +89,16 @@ export function run() {
   });
 
   const songs = loadSongs(L);
-  check('曲库数量 115', () => assert.equal(songs.length, 115));
+  check('曲库数量 95', () => assert.equal(songs.length, 95));
   check('曲库分类齐全', () => {
     const cats = new Set(songs.map((s) => s.category).filter(Boolean));
-    ['儿歌', '民歌', '古典', '完整曲', '圣诞', '世界', '练习'].forEach((c) => assert.ok(cats.has(c), '缺分类 ' + c));
+    ['儿歌', '民歌', '古典', '完整曲', '圣诞', '世界'].forEach((c) => assert.ok(cats.has(c), '缺分类 ' + c));
+  });
+  check('没有短于 10 秒的曲目', () => {
+    for (const s of songs) {
+      const sec = s.notes.reduce((sum, n) => sum + (n[2] || 1), 0) * s.tempo / 1000;
+      assert.ok(sec >= 10, s.title + ' 只有 ' + sec.toFixed(1) + ' 秒');
+    }
   });
   check('完整曲至少 5 首且不短于 40 秒', () => {
     const full = songs.filter((s) => s.full);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>落音 PianoFall · 在线钢琴与智能练习</title>
-    <meta name="description" content="零基础也能弹一首像样的曲子。在线钢琴、新手/高手双模式、115 首公有领域曲目、本地音频伴奏与智能扒谱，所有音频只在本机处理。">
+    <meta name="description" content="零基础也能弹一首像样的曲子。在线钢琴、新手/高手双模式、95 首公有领域曲目、本地音频伴奏与智能扒谱，所有音频只在本机处理。">
     <meta name="theme-color" content="#0a0a0f">
     <meta name="color-scheme" content="dark">
     <meta name="Apple-mobile-web-app-capable" content="yes">
@@ -14,14 +14,14 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="落音 PianoFall">
     <meta property="og:title" content="落音 PianoFall · 在线钢琴与智能练习">
-    <meta property="og:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、115 首公有领域曲目、本地音频伴奏与智能扒谱。">
+    <meta property="og:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、95 首公有领域曲目、本地音频伴奏与智能扒谱。">
     <meta property="og:url" content="https://yangfanwudi.github.io/luoyin-pianofall/">
     <meta property="og:image" content="https://yangfanwudi.github.io/luoyin-pianofall/assets/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="落音 PianoFall · 在线钢琴与智能练习">
-    <meta name="twitter:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、115 首公有领域曲目、本地音频伴奏与智能扒谱。">
+    <meta name="twitter:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、95 首公有领域曲目、本地音频伴奏与智能扒谱。">
     <meta name="twitter:image" content="https://yangfanwudi.github.io/luoyin-pianofall/assets/og-image.png">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -1177,7 +1177,7 @@
             flex-direction: column;
             gap: 5px;
         }
-        /* 展开 115 首时不要拉出六千像素的长页：列表内部滚动，收起按钮仍在下方 */
+        /* 展开 95 首时不要拉出六千像素的长页：列表内部滚动，收起按钮仍在下方 */
         .song-list.is-expanded {
             max-height: 68vh;
             overflow-y: auto;
@@ -1887,6 +1887,157 @@
             .audio-dock .dock-controls input[type="range"] { width: 62px; }
             .site-footer { padding-bottom: 120px; }
         }
+
+        /* ========== v4.12 手机横屏演奏台 ==========
+           只在“横屏且高度较矮”的手机上生效；平板/桌面横屏仍用原布局。
+           目标：21 个白键按宽度自适应铺满，不再横向滚动；尽量把高度让给键床。 */
+        @media (orientation: landscape) and (max-height: 520px) {
+            html, body {
+                height: 100%;
+                height: 100dvh;
+                overflow: hidden;
+            }
+            body {
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+            }
+            .topbar {
+                position: static;
+                min-height: 34px;
+                padding: 3px 10px;
+            }
+            .brand img { width: 24px; height: 24px; border-radius: 6px; }
+            .brand b { font-size: 14px; }
+            .brand em { display: none; }
+            .topbar-actions { gap: 5px; flex-wrap: nowrap; }
+            .icon-btn { padding: 4px 8px; font-size: 11px; }
+            .difficulty-switch button { padding: 3px 8px; font-size: 11px; }
+
+            .app-main { flex: 1 1 auto; min-height: 0; justify-content: flex-start; }
+            /* 自由演奏与演奏中内容不满一屏，整体垂直居中，键床不会悬在半空 */
+            body[data-mode="free"] .app-main,
+            body.is-playing .app-main { justify-content: center; }
+
+            /* 横屏只保留：模式标签 / 选曲或控件 / 键床 */
+            .app-intro,
+            .current-song-bar,
+            .range-note,
+            .piano-scroll-hint,
+            .key-hint,
+            .visualizer,
+            .site-footer,
+            .songs-panel { display: none !important; }
+
+            .mode-tabs { margin: 3px 0 2px; gap: 6px; flex-wrap: nowrap; }
+            .mode-tab { padding: 4px 10px; font-size: 11px; }
+
+            .controls {
+                flex: 0 0 auto;
+                padding: 2px 8px 4px;
+                gap: 8px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+            }
+            .control-group { gap: 4px; }
+            .control-group label { font-size: 10px; }
+            .control-group input[type="range"] { width: 64px; }
+            .control-group select { font-size: 10px; padding: 3px 4px; max-width: 118px; }
+            .controls .btn { padding: 4px 8px; font-size: 10px; }
+            #octaveDisplay { font-size: 10px; min-width: 42px; }
+
+            .piano-container {
+                flex: 0 0 auto;
+                width: calc(100% - 12px);
+                margin: 2px auto;
+                padding: 6px 8px 8px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+            /* 键床定高：200px 更接近真钢琴比例，不再拉成细长条 */
+            .piano-wrap {
+                height: 200px;
+                width: 100%;
+                min-width: 0;
+            }
+            .piano {
+                width: 100%;
+                height: 100%;
+            }
+            .piano-wrap .piano { width: 100%; }
+            /* 选曲页内容更高：让容器可收缩，保证曲目卡与键床都在屏内 */
+            body[data-mode="tutor"]:not(.is-playing) .piano-container {
+                flex: 1 1 auto;
+                min-height: 96px;
+            }
+            body[data-mode="tutor"]:not(.is-playing) .piano-wrap { height: 100%; }
+            .key-white {
+                width: calc((100% - 42px) / 21);
+                height: 100%;
+                padding-bottom: 6px;
+            }
+            .key-black {
+                width: calc((100% - 42px) / 21 * 0.62);
+                height: 62%;
+                padding-bottom: 4px;
+            }
+            .key-white .note-name { font-size: 9px; }
+            .key-white .key-label,
+            .key-black .key-label { display: none; }
+            .keymap-rail { display: none; }
+
+            /* 演奏进行中：压掉说明与速度行，把高度留给键床 */
+            body.is-playing .play-rate-row,
+            body.is-playing .tutor-hint,
+            body.is-playing .tutor-progress-text,
+            body.is-playing .tutor-song { display: none; }
+            /* 演奏 HUD 浮在键床上方，不再占布局高度 */
+            body.is-playing .mode-tabs { display: none; }
+            body.is-playing .tutor-stage { gap: 0; }
+            body.is-playing .play-hud {
+                position: fixed;
+                left: 8px;
+                top: 38px;
+                z-index: 25;
+                gap: 8px;
+                padding: 3px 9px;
+                border-radius: 8px;
+                font-size: 11px;
+                background: rgba(10,10,15,0.55);
+                backdrop-filter: blur(6px);
+            }
+            body.is-playing .tutor-feedback {
+                position: fixed;
+                left: 50%;
+                top: 74px;
+                transform: translateX(-50%);
+                z-index: 25;
+                min-height: 0;
+                font-size: 13px;
+                pointer-events: none;
+            }
+            body.is-playing .tutor-progress-bar {
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 34px;
+                z-index: 24;
+                margin: 0;
+            }
+            body.is-playing #tutorExit {
+                position: fixed;
+                right: 8px;
+                top: 38px;
+                z-index: 26;
+                padding: 3px 9px;
+                font-size: 10px;
+            }
+            body.is-playing #ghostToggle { display: none; }
+            .tutor-panel { padding: 2px 8px; }
+            .tutor-stage { gap: 6px; }
+            .practice-picks { gap: 6px; }
+            .practice-pick { padding: 8px 9px; }
+        }
     </style>
 </head>
 <body>
@@ -1910,7 +2061,7 @@
         <div class="app-intro">
             <div class="app-intro-copy">
                 <b>点一下琴键，直接开始</b>
-                <span>115 首公有领域曲目 · 本地音频不上传 · 可安装到桌面</span>
+                <span>95 首公有领域曲目 · 本地音频不上传 · 可安装到桌面</span>
             </div>
             <button class="icon-btn install-btn" id="installBtn" type="button" hidden>安装 App</button>
         </div>
@@ -2100,7 +2251,6 @@
                     <option value="完整曲">完整曲（长）</option>
                     <option value="圣诞">圣诞</option>
                     <option value="世界">世界民谣</option>
-                    <option value="练习">练习</option>
                     <option value="导入">导入</option>
                 </select>
                 <select id="songSort" aria-label="排序方式">
@@ -2124,7 +2274,7 @@
             曲目均为公有领域作品/民歌，古典曲目为本项目简化编配或主题片段。<br>
             本地音频只在你的浏览器内解码，不会上传；Basic Pitch 扒谱同样在本机运行。<br>
             <a href="https://github.com/yangfanwudi/luoyin-pianofall" target="_blank" rel="noopener">GitHub 开源</a>
-            · 落音 PianoFall v4.5
+            · 落音 PianoFall v4.13
         </footer>
     </div>
 
@@ -2288,6 +2438,7 @@
     <script src="js/songs-more.js"></script>
     <script src="js/songs-library.js"></script>
     <script src="js/songs-full.js"></script>
+    <script src="js/songs-filter.js"></script>
     <script src="js/import.js"></script>
     <script>
         // ========== 音频引擎 ==========
@@ -2573,25 +2724,11 @@
         // ========== 构建钢琴键盘 ==========
         const pianoEl = document.getElementById('piano');
         const keyElements = new Map();
-        let mouseIsDown = false; // 鼠标左键是否按下（用于刮奏）
-        let mouseNoteId = null;  // 当前鼠标按住的音
-
-        document.addEventListener('mouseup', () => {
-            if (mouseNoteId) {
-                releaseKey(mouseNoteId);
-                mouseNoteId = null;
-            }
-            mouseIsDown = false;
-        });
-
-        // 鼠标拖出窗口再松开会收不到 mouseup，离开页面时统一复位
-        document.addEventListener('mouseleave', () => {
-            mouseIsDown = false;
-            if (mouseNoteId) {
-                releaseKey(mouseNoteId);
-                mouseNoteId = null;
-            }
-        });
+        // v4.12：统一用 Pointer Events 处理鼠标与触摸。
+        // pointerId → noteId 让多指和弦互不干扰；notePointerCount 保证同一个键
+        // 被多根手指按住时，最后一根抬起才真正松开。
+        const pointerNotes = new Map();
+        const notePointerCount = new Map();
 
         // 键位映射不再维护第二张表：全部从 Luoyin.KEY_LAYOUT 派生，
         // 避免"琴键标签和实际监听用的键位表不同步"这类问题。
@@ -2661,44 +2798,71 @@
                 keyElements.set(bn.noteId, key);
             });
 
-            // 鼠标/触摸事件
-            pianoEl.querySelectorAll('.key-white, .key-black').forEach(key => {
-                key.addEventListener('mousedown', (e) => {
-                    if (e.button !== 0) return; // 只响应左键，避免右键菜单也触发琴键
-                    e.preventDefault();
-                    mouseIsDown = true;
-                    mouseNoteId = key.dataset.noteId;
-                    pressKey(key.dataset.noteId, key.dataset.note, parseInt(key.dataset.octave));
-                    if (currentMode === 'tutor') tutorInput(key.dataset.note, key.dataset.noteId);
-                });
-                key.addEventListener('mouseenter', () => {
-                    // 按住左键滑过琴键 = 刮奏
-                    if (!mouseIsDown) return;
-                    if (mouseNoteId && mouseNoteId !== key.dataset.noteId) releaseKey(mouseNoteId);
-                    mouseNoteId = key.dataset.noteId;
-                    pressKey(key.dataset.noteId, key.dataset.note, parseInt(key.dataset.octave));
-                    if (currentMode === 'tutor') tutorInput(key.dataset.note, key.dataset.noteId);
-                });
-                key.addEventListener('mouseleave', () => {
-                    releaseKey(key.dataset.noteId);
-                    if (mouseNoteId === key.dataset.noteId) mouseNoteId = null;
-                });
-                key.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    pressKey(key.dataset.noteId, key.dataset.note, parseInt(key.dataset.octave));
-                    if (currentMode === 'tutor') tutorInput(key.dataset.note, key.dataset.noteId);
-                }, { passive: false });
-                key.addEventListener('touchend', (e) => {
-                    e.preventDefault();
-                    releaseKey(key.dataset.noteId);
-                });
-                key.addEventListener('touchcancel', () => {
-                    releaseKey(key.dataset.noteId);
-                });
-            });
-
+            // 指针事件统一挂在 #piano 上（见 buildPiano 下方），
+            // 这里不再逐键绑定 mouse/touch，避免重建键盘后重复监听。
             buildKeymapRail();
         }
+
+        // ========== v4.12 指针输入：多指和弦 + 跨键刮奏 ==========
+        function keyElementAtPoint(x, y) {
+            const el = document.elementFromPoint(x, y);
+            return el && el.closest ? el.closest('.key-white, .key-black') : null;
+        }
+
+        function pressPointerOn(pointerId, el) {
+            if (!el) return;
+            const noteId = el.dataset.noteId;
+            const prev = pointerNotes.get(pointerId);
+            if (prev === noteId) return;
+            if (prev) releasePointer(pointerId);
+
+            pointerNotes.set(pointerId, noteId);
+            const count = (notePointerCount.get(noteId) || 0) + 1;
+            notePointerCount.set(noteId, count);
+            // 同一个键被多根手指按住时只发一次声，最后一根抬起才释放
+            if (count === 1) {
+                pressKey(noteId, el.dataset.note, parseInt(el.dataset.octave, 10));
+                if (currentMode === 'tutor') tutorInput(el.dataset.note, noteId);
+            }
+        }
+
+        function releasePointer(pointerId) {
+            const noteId = pointerNotes.get(pointerId);
+            if (!noteId) return;
+            pointerNotes.delete(pointerId);
+            const count = (notePointerCount.get(noteId) || 1) - 1;
+            if (count <= 0) {
+                notePointerCount.delete(noteId);
+                releaseKey(noteId);
+            } else {
+                notePointerCount.set(noteId, count);
+            }
+        }
+
+        function releaseAllPointers() {
+            Array.from(pointerNotes.keys()).forEach(releasePointer);
+        }
+
+        pianoEl.addEventListener('pointerdown', (e) => {
+            if (e.pointerType === 'mouse' && e.button !== 0) return;
+            e.preventDefault();
+            const el = keyElementAtPoint(e.clientX, e.clientY);
+            if (!el) return;
+            // 捕获后手指滑出琴键仍能收到 move/up，滑回来可以继续刮奏
+            try { pianoEl.setPointerCapture(e.pointerId); } catch (err) {}
+            pressPointerOn(e.pointerId, el);
+        });
+
+        pianoEl.addEventListener('pointermove', (e) => {
+            if (!pointerNotes.has(e.pointerId)) return;
+            const el = keyElementAtPoint(e.clientX, e.clientY);
+            if (!el) { releasePointer(e.pointerId); return; }
+            pressPointerOn(e.pointerId, el);
+        });
+
+        ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((type) => {
+            pianoEl.addEventListener(type, (e) => releasePointer(e.pointerId));
+        });
 
         // 键盘提示条：位置按琴键真实渲染矩形写入，白键/黑键都居中。
         // 页面滚动容器变化时重建，避免百分比/像素混算导致错位。
@@ -2817,13 +2981,18 @@
             pressedKeys.clear();
             heldNoteIds.forEach(noteId => releaseKey(noteId));
             heldNoteIds.clear();
+            releaseAllPointers();
             if (play.active) resetGuide();
         });
 
         let keymapResizeTimer = null;
         window.addEventListener('resize', () => {
             clearTimeout(keymapResizeTimer);
-            keymapResizeTimer = setTimeout(buildKeymapRail, 120);
+            keymapResizeTimer = setTimeout(() => {
+                buildKeymapRail();
+                // 横竖屏切换后键宽变了，正在演奏的方块要按新键位重新排
+                if (play.active) buildPlayBlocks();
+            }, 160);
         });
 
         // ========== 音频可视化 ==========
@@ -3656,6 +3825,10 @@
         }
 
         function playLaneHeight() {
+            // 手机横屏：21 键要铺满且不滚动，下落区只占约三成高度
+            if (window.matchMedia('(orientation: landscape) and (max-height: 520px)').matches) {
+                return Math.max(96, Math.round(window.innerHeight * 0.30));
+            }
             return window.innerWidth <= 768 ? 240 : 300;
         }
 
@@ -4138,6 +4311,7 @@
             document.getElementById('practiceMoreRow').hidden = true;
             document.getElementById('tutorListWrap').hidden = true;
             document.getElementById('tutorStage').hidden = false;
+            document.body.classList.add('is-playing');
             document.getElementById('tutorDone').hidden = true;
             document.getElementById('tutorDoneRow').hidden = true;
             document.getElementById('tutorSongName').textContent = '正在演奏：' + (song.title || song.name) + ' · ' + difficultyStars(song.difficulty) + ' · ' + Luoyin.difficultyConfig(difficultyLevel).name + '模式';
@@ -4282,6 +4456,7 @@
         function resetGuide() {
             // 停渲染与调度，清方块；伴奏残余由 stopAll 的
             // activeHarmonyNotes / harmonyTimeouts 清理负责
+            document.body.classList.remove('is-playing');
             play.active = false;
             if (play.raf) cancelAnimationFrame(play.raf);
             if (play.schedulerTimer) clearTimeout(play.schedulerTimer);

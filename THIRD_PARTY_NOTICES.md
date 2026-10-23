@@ -36,23 +36,30 @@
 
 ## Mutopia Project
 
-- 用途：`site/js/songs-full.js` 中 5 首完整曲的 MIDI 来源与主旋律提取。
+- 用途：`site/js/songs-full.js` 中 4 首完整曲的 MIDI 来源与主旋律提取。
 - 站点：https://www.mutopiaproject.org/
 - 许可：所用作曲品与排版均为公有领域，各曲目页标注 “Public Domain”。
 - 曲目：
-  - 贝多芬《致爱丽丝》WoO 59（Mutopia-2015/08/18-931）
   - 巴赫 / 佩措尔德《G 大调小步舞曲》BWV Anh. 114（Mutopia-75）
   - 莫扎特《土耳其进行曲》K.331 第三乐章（Mutopia-108）
   - 巴赫《G 弦上的咏叹调》BWV 1068（Mutopia-1534）
   - 肖邦《前奏曲》Op.28 No.4（Mutopia-468）
 - 说明：本项目只提取单声部主旋律，按 1/4 拍量化，并把超出 C3–B5 的个别音折回八度；不是原谱的钢琴改编。
 
+## TROMPA MEI encodings
+
+- 用途：`site/js/songs-full.js` 中《致爱丽丝》的 MEI 编码来源；MIDI 版本会把手部伴奏混进旋律，改用带 beam 的 MEI 后按“休止后的三音上行分解和弦”规则剔除伴奏。
+- 源码：https://github.com/trompamusic-encodings/Beethoven_WoO59_BreitkopfHaertel
+- 许可：CC BY 4.0（Werner Goebl / University of Music and Performing Arts Vienna，TROMPA Project）
+- DOI：https://doi.org/10.5281/zenodo.4735563
+- 说明：只提取右手单声部主旋律并折回 C3–B5。
+
 ## 曲目版权
 
 - 所有曲目均为公有领域作品（传统民歌、古典作品）或本项目基于公有领域主题的简化编配。
-- 不包含任何现代版权流行曲。
+- 不包含任何现代版权流行曲；B 站/Spotify 等平台的录音不进入曲库。
 - 古典曲目标注“简化编配 / 主题片段”，不代表原曲完整版。
-- `songs-full.js` 的 5 首来自 Mutopia 公有领域 MIDI，已在 README 与本节列出来源。
+- `songs-full.js` 的 5 首来源已在 README 与本节列出；`songs-filter.js` 会过滤 <10 秒的短片段。
 
 ## 字体 / 图标
 

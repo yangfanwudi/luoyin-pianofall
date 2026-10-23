@@ -7,10 +7,11 @@
 ## 功能
 
 - 🎹 三个八度钢琴键床，鼠标、触摸、电脑键盘都能弹，支持刮奏与延音。
+- 📱 **手机横屏演奏台**：横屏时 21 个白键按宽度铺满、不再横向滚动；演奏模式隐藏曲库与说明，键床约 215px，分数/退出/进度以浮层显示。多指和弦与手指刮奏由 Pointer Events 统一处理。
 - 🌱 **新手 / 高手** 双模式：新手慢速 + 宽判定 + 幽灵手补音 + 键盘提示；高手原速 + 严格判定。
-- 🎵 **115 首公有领域曲目**：儿歌、中国民歌、古典主题、完整曲、圣诞颂歌、世界民谣与基础练习；支持搜索、难度/分类筛选、排序、收藏和随机一首。曲库默认只列 8 首，点“显示全部 115 首”展开。每首按原曲/主题只放一遍，不做自动循环；列表时长就是真实时长（多数 10–25 秒，完整曲 41 秒–2 分 30 秒）。
-- 🎼 **完整曲**：从 Mutopia Project 的公有领域 MIDI 提取主旋律的 5 首完整版——致爱丽丝（2:10）、土耳其进行曲（2:30）、肖邦前奏曲 Op.28 No.4（1:48）、G弦上的咏叹调（1:05）、巴赫小步舞曲（0:41）；分类选「完整曲（长）」即可只看这批。
-- 🎮 **演奏模式**：默认 3 首当前难度精选，点“查看全部 115 首”才展开长列表；下落方块 + Perfect/Good/Miss 判定 + 连击 + 评级 + 成绩分享卡。
+- 🎵 **95 首公有领域曲目**：儿歌、中国民歌、古典主题、完整曲、圣诞颂歌、世界民谣；支持搜索、难度/分类筛选、排序、收藏和随机一首。曲库默认只列 8 首，点“显示全部 95 首”展开。单遍不足 10 秒的片段已在加载时过滤掉；列表时长就是真实时长。
+- 🎼 **完整曲**：5 首完整版——致爱丽丝（1:44，TROMPA MEI/CC BY 4.0）、土耳其进行曲（2:30）、肖邦前奏曲 Op.28 No.4（1:48）、G弦上的咏叹调（1:05）、巴赫小步舞曲（0:41，均为 Mutopia 公有领域 MIDI）；分类选「完整曲（长）」即可只看这批。
+- 🎮 **演奏模式**：默认 3 首当前难度精选，点“查看全部 95 首”才展开长列表；下落方块 + Perfect/Good/Miss 判定 + 连击 + 评级 + 成绩分享卡。
 - 🎧 **本地音频伴奏**：导入 mp3 / wav / m4a / ogg / flac，播放 / 循环 / 调速 / 音量，全部在浏览器内处理，不上传。
 - 🎼 **MIDI 导入**：拖入 `.mid` / `.midi`，自动提取主旋律并生成可练习谱。
 - ✨ **智能扒谱**：基于 Spotify Basic Pitch，在浏览器内把独奏/清唱音频识别成可练习旋律（首次需加载约 1 MB 模型）。
@@ -48,8 +49,8 @@ python -m http.server 8765
 
 - 纯 HTML/CSS/JavaScript，无构建步骤；`site/` 即部署根目录。
 - Basic Pitch 的浏览器 bundle 由 `tools/bp` 下的 esbuild 脚本生成，放在 `site/vendor/basic-pitch/`，仅在使用智能扒谱时懒加载。
-- 曲库在 `site/js/songs.js`（原有 10 首）、`site/js/songs-extra.js`（17 首）、`site/js/songs-more.js`（14 首）和 `site/js/songs-library.js`（73 首），再加 `js/songs-full.js`（5 首完整版，其中 4 首替换同名片段、1 首新增），共 **115 首**。分类为儿歌 / 民歌 / 古典 / 完整曲 / 圣诞 / 世界 / 练习。
-- 曲目原始谱面大多只有 5–35 秒；`normalizeSongs()` 不自动补 `repeat`，列表、自由演奏、演奏模式都只放一遍。完整曲来自 Mutopia 的 MIDI 主旋律提取，单遍 41 秒–2 分 30 秒。
+- 曲库在 `site/js/songs.js`（原有 10 首）、`site/js/songs-extra.js`（17 首）、`site/js/songs-more.js`（14 首）、`site/js/songs-library.js`（73 首）、`js/songs-full.js`（替换/新增 5 首完整版），再由 `js/songs-filter.js` 过滤掉单遍不足 10 秒的 20 首，最终 **95 首**。分类为儿歌 / 民歌 / 古典 / 完整曲 / 圣诞 / 世界。
+- `normalizeSongs()` 不自动补 `repeat`，列表、自由演奏、演奏模式都只放一遍。完整曲来自 Mutopia 的 MIDI 主旋律提取（致爱丽丝改用 TROMPA 的 MEI 编码），单遍 41 秒–2 分 30 秒。
 
 ### 目录
 
@@ -60,8 +61,9 @@ site/
 ├─ js/songs.js         曲库（10）
 ├─ js/songs-extra.js   扩充曲库（17）
 ├─ js/songs-more.js    第二批扩充（14）
-├─ js/songs-library.js 第三批扩充（73：民歌/古典/圣诞/世界/练习）
-├─ js/songs-full.js    完整曲 5 首（Mutopia 主旋律提取）
+├─ js/songs-library.js 第三批扩充（73：民歌/古典/圣诞/世界）
+├─ js/songs-full.js    完整曲 5 首（Mutopia/TROMPA 主旋律提取）
+├─ js/songs-filter.js  过滤 <10 秒的短片段
 ├─ js/import.js        音频伴奏 / MIDI / Basic Pitch
 ├─ vendor/basic-pitch/ 懒加载扒谱 bundle + 模型
 ├─ assets/             图标 / OG 图 / favicon
@@ -80,7 +82,8 @@ site/
 
 所有曲目均为 **公有领域作品 / 民歌**，或由本项目做简化编配；不包含现代版权流行曲。
 第三批 73 首以民歌通行旋律、圣诞颂歌、世界民谣和古典主题的单声部简化编配为主；古典与部分长曲只保留最容易被认出的段落，不冒充原曲完整版。
-`js/songs-full.js` 的 5 首完整曲来自 [Mutopia Project](https://www.mutopiaproject.org/) 的公有领域 MIDI，提取单声部主旋律并折回 C3–B5，属于旋律提取版，不是原谱钢琴改编。
+`js/songs-full.js` 的 5 首完整曲：致爱丽丝来自 [TROMPA MEI 编码](https://github.com/trompamusic-encodings/Beethoven_WoO59_BreitkopfHaertel)（CC BY 4.0），其余 4 首来自 [Mutopia Project](https://www.mutopiaproject.org/)（公有领域）；均为单声部主旋律提取并折回 C3–B5，不是原谱钢琴改编。
+`js/songs-filter.js` 会在加载时过滤单遍不足 10 秒的片段，避免“点开就结束”。
 新手曲目旋律参考了 [Doinu](https://github.com/Endika/doinu)（MIT）的公有领域曲库，特此致谢。
 
 ## 第三方
@@ -88,7 +91,8 @@ site/
 - [Spotify Basic Pitch](https://github.com/spotify/basic-pitch-ts) — Apache-2.0（模型与浏览器端推理）
 - [TensorFlow.js](https://www.tensorflow.org/js) — Apache-2.0（随 Basic Pitch bundle）
 - [Doinu](https://github.com/Endika/doinu) — MIT（部分公有领域旋律数据）
-- [Mutopia Project](https://www.mutopiaproject.org/) — 公有领域乐谱/MIDI（5 首完整曲的旋律来源）
+- [Mutopia Project](https://www.mutopiaproject.org/) — 公有领域乐谱/MIDI（4 首完整曲）
+- [TROMPA MEI encodings](https://github.com/trompamusic-encodings/Beethoven_WoO59_BreitkopfHaertel) — CC BY 4.0（致爱丽丝 MEI 编码）
 - [Bach to Basics](https://github.com/gigliof/bach-to-basics) — MIT（导入/练习交互参考）
 
 完整许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
