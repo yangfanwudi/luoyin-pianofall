@@ -2123,7 +2123,7 @@
             曲目均为公有领域作品/民歌，古典曲目为本项目简化编配或主题片段。<br>
             本地音频只在你的浏览器内解码，不会上传；Basic Pitch 扒谱同样在本机运行。<br>
             <a href="https://github.com/yangfanwudi/luoyin-pianofall" target="_blank" rel="noopener">GitHub 开源</a>
-            · 落音 PianoFall v4.2
+            · 落音 PianoFall v4.3
         </footer>
     </div>
 
@@ -2912,7 +2912,15 @@
                 if (!song.key) song.key = 'C';
                 if (!song.source) song.source = '公有领域 / 本项目编配';
                 song.totalBeats = song.notes.reduce((sum, item) => sum + (item[2] || 1), 0);
-                song.durationSec = Math.round(song.totalBeats * song.tempo / 1000 * (song.repeat || 1));
+                const baseSec = song.totalBeats * song.tempo / 1000;
+                // 原曲太短时自动多循环几遍：列表里显示的是“总时长”，
+                // 演奏模式也按 repeat 铺多遍方块，避免 10 秒就结束。
+                if (!song.imported && baseSec > 0) {
+                    const target = baseSec < 10 ? 40 : 60;
+                    const need = Math.ceil(target / baseSec);
+                    song.repeat = Math.max(song.repeat || 1, Math.min(need, 6));
+                }
+                song.durationSec = Math.round(baseSec * (song.repeat || 1));
             });
         }
 
@@ -2926,6 +2934,12 @@
             const m = Math.floor(sec / 60);
             const s = sec % 60;
             return m ? (m + ':' + String(s).padStart(2, '0')) : (s + '秒');
+        }
+
+        // 列表/正在播放条上的时长带上循环遍数：1:05 ×4
+        function durationLabel(song) {
+            const reps = song && song.repeat ? song.repeat : 1;
+            return formatDuration(song && song.durationSec) + (reps > 1 ? ' ×' + reps : '');
         }
 
         var FAVORITES_KEY = 'luoyin.favorites.v1';
@@ -2988,7 +3002,7 @@
 
             const dur = document.createElement('span');
             dur.className = 'song-dur';
-            dur.textContent = formatDuration(song.durationSec);
+            dur.textContent = durationLabel(song);
 
             const actions = document.createElement('span');
             actions.className = 'song-actions';
@@ -3158,7 +3172,7 @@
             bar.hidden = false;
             name.textContent = song.title || song.name;
             meta.textContent = (song.composer || '') + ' · ' + (song.category || '') +
-                ' · ' + difficultyStars(song.difficulty) + ' · ' + formatDuration(song.durationSec) +
+                ' · ' + difficultyStars(song.difficulty) + ' · ' + durationLabel(song) +
                 (song.imported ? ' · 本地导入' : '');
             const practiceBtn = document.getElementById('practiceCurrentBtn');
             if (practiceBtn) practiceBtn.hidden = false;
@@ -3967,7 +3981,7 @@
                 title.textContent = song.title;
                 const sub = document.createElement('span');
                 sub.className = 'pp-sub';
-                sub.textContent = (song.composer || '传统') + ' · ' + formatDuration(song.durationSec);
+                sub.textContent = (song.composer || '传统') + ' · ' + durationLabel(song);
                 const stars = document.createElement('span');
                 stars.className = 'pp-stars';
                 stars.textContent = difficultyStars(song.difficulty);
@@ -4016,7 +4030,7 @@
                 name.textContent = song.title || song.name;
                 const sub = document.createElement('div');
                 sub.style.cssText = 'font-size:11px;color:rgba(255,255,255,0.38);margin-top:3px;';
-                sub.textContent = (song.composer || '') + ' · ' + formatDuration(song.durationSec);
+                sub.textContent = (song.composer || '') + ' · ' + durationLabel(song);
                 name.appendChild(sub);
 
                 const right = document.createElement('div');
@@ -4103,16 +4117,21 @@
                 schedulerTimer: null, raf: null, laneH: 300,
                 score: 0, perfect: 0, good: 0, miss: 0, combo: 0, maxCombo: 0
             };
-            // 时间轴：休止符占节拍但不生成方块
+            // 时间轴：休止符占节拍但不生成方块；短曲按 repeat 铺多遍，
+            // 与列表里的“总时长”和自由演奏的循环次数保持一致。
+            const repeatCount = Math.max(1, song.repeat || 1);
             let beat = 0;
-            song.notes.forEach((item, i) => {
-                const dur = item[2] || 1;
-                if (item[0]) {
-                    play.events.push({ idx: i, note: item[0], octave: item[1],
-                                       beat, dur, time: 0, judged: null, el: null });
-                }
-                beat += dur;
-            });
+            for (let pass = 0; pass < repeatCount; pass++) {
+                song.notes.forEach((item, i) => {
+                    const dur = item[2] || 1;
+                    if (item[0]) {
+                        play.events.push({ idx: i, pass, note: item[0], octave: item[1],
+                                           beat, dur, time: 0, judged: null, el: null });
+                    }
+                    beat += dur;
+                });
+                if (pass < repeatCount - 1) beat += 1; // 每遍之间留一拍换气
+            }
             play.totalBeats = beat;
             // 起点 = 现在 + 预备量：方块从层顶落到判定线正好用掉 PLAY_LEAD
             play.startTime = audioCtx.currentTime + PLAY_LEAD + 0.4;
@@ -4128,7 +4147,7 @@
             document.getElementById('tutorStage').hidden = false;
             document.getElementById('tutorDone').hidden = true;
             document.getElementById('tutorDoneRow').hidden = true;
-            document.getElementById('tutorSongName').textContent = '正在演奏：' + (song.title || song.name) + ' · ' + difficultyStars(song.difficulty) + ' · ' + Luoyin.difficultyConfig(difficultyLevel).name + '模式';
+            document.getElementById('tutorSongName').textContent = '正在演奏：' + (song.title || song.name) + ' · ' + difficultyStars(song.difficulty) + ' · ' + Luoyin.difficultyConfig(difficultyLevel).name + '模式' + (repeatCount > 1 ? ' · 共 ' + repeatCount + ' 遍' : '');
             setTutorFeedback('听节奏，准备…', '');
             updateComboUI();
             updateGuideProgress();
