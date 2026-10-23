@@ -1,0 +1,22 @@
+{
+  "name": "落音 PianoFall · 在线钢琴与智能练习",
+  "short_name": "落音",
+  "description": "零基础也能弹一首像样的曲子：新手/高手双模式、27 首公有领域曲目、本地音频伴奏与智能扒谱。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "categories": ["music", "education", "entertainment"],
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "新手 · 小星星", "short_name": "新手", "url": "./?quick=novice" },
+    { "name": "高手 · 月光", "short_name": "高手", "url": "./?quick=expert" }
+  ]
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yangfanwudi.github.io/luoyin-pianofall/sitemap.xml

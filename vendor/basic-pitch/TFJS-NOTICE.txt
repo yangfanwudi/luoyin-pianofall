@@ -1,0 +1,5 @@
+TensorFlow.js
+Copyright 2018 Google LLC
+Licensed under the Apache License, Version 2.0.
+https://github.com/tensorflow/tfjs
+The full Apache License 2.0 text is included in ./LICENSE (Basic Pitch license).
