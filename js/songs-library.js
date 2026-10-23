@@ -407,7 +407,7 @@
     },
     {
       name: '比才 · 斗牛士之歌', title: '比才 · 斗牛士之歌', composer: '比才',
-      category: '古典', difficulty: 2, key: 'C', tempo: 360, repeat: 1,
+      category: '古典', difficulty: 2, key: 'F', tempo: 360, repeat: 1,
       harmonyCycle: 16, harmony: [], source: '公有领域 · 主题简化编配',
       notes: [
         ['C',5],['C',5],['C',5],['A',4],['F',4,2],['C',5],['C',5],['C',5],
@@ -421,8 +421,8 @@
       harmonyCycle: 16, harmony: [], source: '公有领域 · 主题简化编配',
       notes: [
         ['E',5],['G#',5],['G#',5],['G#',5],['F#',5],['E',5,2],['E',5],['G#',5],
-        ['G#',5],['G#',5],['F#',5],['E',5,2],['F#',5],['A',5],['A',5],['A',5],
-        ['G#',5],['F#',5,2],['E',5],['F#',5],['G#',5],['F#',5],['E',5,3]
+        ['G#',5],['G#',5],['F#',5],['E',5,2],['D#',5],['F#',5],['F#',5],['F#',5],
+        ['E',5],['D#',5,2],['E',5],['F#',5],['G#',5],['F#',5],['E',5,3]
       ]
     },
     {
@@ -504,7 +504,7 @@
     },
     {
       name: '齐来崇拜', title: '齐来崇拜', composer: '传统圣诞颂歌',
-      category: '圣诞', difficulty: 1, key: 'C', tempo: 380, repeat: 1,
+      category: '圣诞', difficulty: 1, key: 'G', tempo: 380, repeat: 1,
       harmonyCycle: 16, harmony: [], source: '传统圣诞颂歌 · 公有领域',
       notes: [
         ['G',4],['G',4],['A',4],['G',4],['F#',4],['E',4,2],['D',4],['E',4],
@@ -514,7 +514,7 @@
     },
     {
       name: '听啊天使高声唱', title: '听啊天使高声唱', composer: '传统圣诞颂歌',
-      category: '圣诞', difficulty: 1, key: 'C', tempo: 380, repeat: 1,
+      category: '圣诞', difficulty: 1, key: 'G', tempo: 380, repeat: 1,
       harmonyCycle: 16, harmony: [], source: '传统圣诞颂歌 · 公有领域',
       notes: [
         ['G',4],['G',4],['G',4],['A',4],['G',4],['F#',4],['E',4,2],['D',4],
