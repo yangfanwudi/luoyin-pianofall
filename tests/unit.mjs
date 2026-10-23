@@ -27,6 +27,7 @@ function loadSongs(Luoyin) {
   vm.createContext(context);
   vm.runInContext(
     read('js/songs.js') + '\n' + read('js/songs-extra.js') + '\n' + read('js/songs-more.js') +
+    '\n' + read('js/songs-library.js') +
     '\nglobalThis.__SONGS = SONGS;',
     context, { filename: 'songs.js' }
   );
@@ -88,7 +89,18 @@ export function run() {
   });
 
   const songs = loadSongs(L);
-  check('曲库数量 41', () => assert.equal(songs.length, 41));
+  check('曲库数量 114', () => assert.equal(songs.length, 114));
+  check('曲库分类齐全', () => {
+    const cats = new Set(songs.map((s) => s.category).filter(Boolean));
+    ['儿歌', '民歌', '古典', '圣诞', '世界', '练习'].forEach((c) => assert.ok(cats.has(c), '缺分类 ' + c));
+  });
+  check('曲名不重复', () => {
+    const seen = new Set();
+    for (const s of songs) {
+      assert.ok(!seen.has(s.title || s.name), '重复曲名 ' + (s.title || s.name));
+      seen.add(s.title || s.name);
+    }
+  });
   check('曲目数据完整', () => {
     const names = new Set(L.NOTE_NAMES);
     for (const s of songs) {

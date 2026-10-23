@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>落音 PianoFall · 在线钢琴与智能练习</title>
-    <meta name="description" content="零基础也能弹一首像样的曲子。在线钢琴、新手/高手双模式、41 首公有领域曲目、本地音频伴奏与智能扒谱，所有音频只在本机处理。">
+    <meta name="description" content="零基础也能弹一首像样的曲子。在线钢琴、新手/高手双模式、114 首公有领域曲目、本地音频伴奏与智能扒谱，所有音频只在本机处理。">
     <meta name="theme-color" content="#0a0a0f">
     <meta name="color-scheme" content="dark">
     <meta name="Apple-mobile-web-app-capable" content="yes">
@@ -14,14 +14,14 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="落音 PianoFall">
     <meta property="og:title" content="落音 PianoFall · 在线钢琴与智能练习">
-    <meta property="og:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、41 首公有领域曲目、本地音频伴奏与智能扒谱。">
+    <meta property="og:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、114 首公有领域曲目、本地音频伴奏与智能扒谱。">
     <meta property="og:url" content="https://yangfanwudi.github.io/luoyin-pianofall/">
     <meta property="og:image" content="https://yangfanwudi.github.io/luoyin-pianofall/assets/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="落音 PianoFall · 在线钢琴与智能练习">
-    <meta name="twitter:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、41 首公有领域曲目、本地音频伴奏与智能扒谱。">
+    <meta name="twitter:description" content="零基础也能弹一首像样的曲子：新手/高手双模式、114 首公有领域曲目、本地音频伴奏与智能扒谱。">
     <meta name="twitter:image" content="https://yangfanwudi.github.io/luoyin-pianofall/assets/og-image.png">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -1140,7 +1140,7 @@
             border-radius: 10px;
         }
 
-        /* v4.1 曲目查询列表 */
+        /* v4.2 曲目查询列表 */
         .songs-panel { max-width: 1100px; }
         .songs-head {
             display: flex;
@@ -1176,6 +1176,13 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+        }
+        /* 展开 114 首时不要拉出六千像素的长页：列表内部滚动，收起按钮仍在下方 */
+        .song-list.is-expanded {
+            max-height: 68vh;
+            overflow-y: auto;
+            padding-right: 4px;
+            overscroll-behavior: contain;
         }
         .song-row {
             display: grid;
@@ -1903,7 +1910,7 @@
         <div class="app-intro">
             <div class="app-intro-copy">
                 <b>点一下琴键，直接开始</b>
-                <span>41 首公有领域曲目 · 本地音频不上传 · 可安装到桌面</span>
+                <span>114 首公有领域曲目 · 本地音频不上传 · 可安装到桌面</span>
             </div>
             <button class="icon-btn install-btn" id="installBtn" type="button" hidden>安装 App</button>
         </div>
@@ -2090,6 +2097,8 @@
                     <option value="儿歌">儿歌</option>
                     <option value="民歌">民歌</option>
                     <option value="古典">古典</option>
+                    <option value="圣诞">圣诞</option>
+                    <option value="世界">世界民谣</option>
                     <option value="练习">练习</option>
                     <option value="导入">导入</option>
                 </select>
@@ -2114,7 +2123,7 @@
             曲目均为公有领域作品/民歌，古典曲目为本项目简化编配或主题片段。<br>
             本地音频只在你的浏览器内解码，不会上传；Basic Pitch 扒谱同样在本机运行。<br>
             <a href="https://github.com/yangfanwudi/luoyin-pianofall" target="_blank" rel="noopener">GitHub 开源</a>
-            · 落音 PianoFall v4.1
+            · 落音 PianoFall v4.2
         </footer>
     </div>
 
@@ -2276,6 +2285,7 @@
     <script src="js/songs.js"></script>
     <script src="js/songs-extra.js"></script>
     <script src="js/songs-more.js"></script>
+    <script src="js/songs-library.js"></script>
     <script src="js/import.js"></script>
     <script>
         // ========== 音频引擎 ==========
@@ -3045,6 +3055,7 @@
                 songFilter.level !== 'all' || songFilter.category !== 'all';
             const showAll = songListExpanded || hasActiveFilter;
             const shown = showAll ? visibleSongIndices : visibleSongIndices.slice(0, SONG_PREVIEW_LIMIT);
+            grid.classList.toggle('is-expanded', shown.length > SONG_PREVIEW_LIMIT);
             shown.forEach(index => {
                 grid.appendChild(buildSongRow(SONGS[index], index));
             });

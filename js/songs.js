@@ -1,5 +1,6 @@
 // 落音 PianoFall 曲库（公有领域作品 + 本项目简化编配）
 // 数据格式：[音名, 八度, 时值(拍)]；null 表示休止。八度为科学音高（C4 = 中央C）。
+// 扩容批次：songs-extra.js（17）、songs-more.js（14）、songs-library.js（73）。
         const SONGS = [
             {
                 name: '小星星',
